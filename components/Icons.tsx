@@ -22,7 +22,11 @@ import {
   Terminal,
   MapPin,
   BarChart3,
-  PieChart
+  PieChart,
+  MessageSquare,
+  Send,
+  Minimize2,
+  Bot
 } from 'lucide-react';
 
 export const Icons = {
@@ -48,5 +52,9 @@ export const Icons = {
   Terminal,
   MapPin,
   BarChart3,
-  PieChart
+  PieChart,
+  MessageSquare,
+  Send,
+  Minimize2,
+  Bot
 };

@@ -75,9 +75,9 @@ export const Hero: React.FC = () => {
 
                 {/* CTA Buttons */}
                 <div className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4 mb-16">
-                  <button className="w-full sm:w-auto px-8 py-4 bg-guance-orange text-white text-lg font-bold rounded-lg hover:bg-orange-600 transition-all shadow-lg shadow-orange-500/30 flex items-center justify-center">
+                  <a href="https://auth.guance.com/middle_page" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto px-8 py-4 bg-guance-orange text-white text-lg font-bold rounded-lg hover:bg-orange-600 transition-all shadow-lg shadow-orange-500/30 flex items-center justify-center">
                     开始免费试用 <Icons.ArrowRight className="ml-2 w-5 h-5"/>
-                  </button>
+                  </a>
                   <button className="w-full sm:w-auto px-8 py-4 bg-white text-gray-700 text-lg font-bold rounded-lg border border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-all flex items-center justify-center">
                     <Icons.Activity className="mr-2 w-5 h-5 text-gray-500"/> 在线 Demo
                   </button>

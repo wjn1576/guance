@@ -7,15 +7,17 @@ export const Footer: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 mb-12">
           <div className="col-span-2 lg:col-span-2">
-            <div className="flex items-center mb-4">
-              <div className="w-8 h-8 bg-guance-orange rounded-md flex items-center justify-center mr-2">
-                 <Icons.Activity className="text-white w-5 h-5" />
-              </div>
-              <span className="text-xl font-bold text-gray-900">Guance 观测云</span>
-            </div>
-            <p className="text-gray-500 text-sm mb-6 max-w-xs">
-              观测云是新一代统一可观测性平台，帮助您监控、排障并优化您的整个技术栈。
-            </p>
+            <a href="https://www.guance.com/product/GuanceDB" target="_blank" rel="noopener noreferrer" className="inline-block group">
+                <div className="flex items-center mb-4">
+                  <div className="w-8 h-8 bg-guance-orange rounded-md flex items-center justify-center mr-2 group-hover:bg-orange-600 transition-colors">
+                     <Icons.Activity className="text-white w-5 h-5" />
+                  </div>
+                  <span className="text-xl font-bold text-gray-900 group-hover:text-guance-orange transition-colors">Guance 观测云</span>
+                </div>
+                <p className="text-gray-500 text-sm mb-6 max-w-xs group-hover:text-gray-700 transition-colors">
+                  观测云是新一代统一可观测性平台，帮助您监控、排障并优化您的整个技术栈。
+                </p>
+            </a>
             <div className="flex space-x-4">
               {/* Social Placeholders */}
               <div className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-200 cursor-pointer text-gray-500">

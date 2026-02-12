@@ -164,9 +164,9 @@ export const Navbar: React.FC = () => {
                    登录
                  </button>
                )}
-               <button className="bg-guance-orange text-white px-5 py-2.5 rounded-md font-medium hover:bg-orange-600 transition-colors shadow-lg shadow-orange-500/30">
+               <a href="https://auth.guance.com/middle_page" target="_blank" rel="noopener noreferrer" className="bg-guance-orange text-white px-5 py-2.5 rounded-md font-medium hover:bg-orange-600 transition-colors shadow-lg shadow-orange-500/30">
                  免费开始
-               </button>
+               </a>
             </div>
 
             {/* Mobile Menu Button */}
@@ -262,9 +262,9 @@ export const Navbar: React.FC = () => {
                     退出登录
                   </button>
                 )}
-                <button className="w-full text-center py-4 bg-guance-orange text-white rounded-xl font-bold text-lg shadow-lg shadow-orange-500/30 active:bg-orange-600">
+                <a href="https://auth.guance.com/middle_page" target="_blank" rel="noopener noreferrer" className="w-full text-center py-4 bg-guance-orange text-white rounded-xl font-bold text-lg shadow-lg shadow-orange-500/30 active:bg-orange-600">
                   免费开始
-                </button>
+                </a>
               </div>
             </div>
           </div>
