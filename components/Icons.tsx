@@ -15,7 +15,14 @@ import {
   Cpu,
   Database,
   Cloud,
-  CheckCircle
+  CheckCircle,
+  Coins,
+  Layers,
+  Code2,
+  Terminal,
+  MapPin,
+  BarChart3,
+  PieChart
 } from 'lucide-react';
 
 export const Icons = {
@@ -34,5 +41,12 @@ export const Icons = {
   Cpu,
   Database,
   Cloud,
-  CheckCircle
+  CheckCircle,
+  Coins,
+  Layers,
+  Code2,
+  Terminal,
+  MapPin,
+  BarChart3,
+  PieChart
 };

@@ -2,6 +2,8 @@ import React from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { Features } from './components/Features';
+import { ProductShowcase } from './components/ProductShowcase';
+import { GlobalNodes } from './components/GlobalNodes';
 import { AiSection } from './components/AiSection';
 import { Footer } from './components/Footer';
 
@@ -11,6 +13,8 @@ function App() {
       <Navbar />
       <main className="flex-grow">
         <Hero />
+        <ProductShowcase />
+        <GlobalNodes />
         <Features />
         <AiSection />
         

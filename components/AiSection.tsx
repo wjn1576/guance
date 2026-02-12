@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Icons } from './Icons';
-import { generateObservabilityInsight } from '../services/geminiService';
+import { generateObservabilityInsightStream } from '../services/geminiService';
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
@@ -15,10 +15,11 @@ export const AiSection: React.FC = () => {
     if (!query.trim()) return;
     
     setLoading(true);
-    setResponse(null);
+    setResponse(""); // Clear for streaming start
     try {
-      const result = await generateObservabilityInsight(query);
-      setResponse(result);
+      for await (const chunk of generateObservabilityInsightStream(query)) {
+        setResponse(prev => (prev === null ? chunk : prev + chunk));
+      }
     } catch (err) {
       setResponse("连接 AI 服务失败。");
     } finally {
@@ -65,10 +66,10 @@ export const AiSection: React.FC = () => {
             />
             <button 
               type="submit"
-              disabled={loading}
+              disabled={loading && response === ""} 
               className="absolute right-2 top-2 bottom-2 bg-guance-orange hover:bg-orange-600 text-white px-6 rounded-lg font-bold transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center"
             >
-              {loading ? (
+              {loading && response === "" ? (
                 <div className="animate-spin h-5 w-5 border-2 border-white border-t-transparent rounded-full"></div>
               ) : (
                 "提问"
@@ -135,7 +136,7 @@ export const AiSection: React.FC = () => {
                 </div>
               </div>
             ) : (
-              // Loading State Placeholder
+              // Loading State Placeholder (Thinking...)
                <div className="flex-grow flex items-center justify-center p-8">
                   <div className="flex flex-col items-center">
                     <div className="animate-pulse flex space-x-2 mb-4">

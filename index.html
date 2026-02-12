@@ -7,6 +7,7 @@
     <meta name="description" content="实时监控指标、链路追踪和日志，实现统一可观测性。" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script>
       tailwind.config = {
         theme: {
@@ -42,6 +43,15 @@
         backdrop-filter: blur(10px);
         border-bottom: 1px solid rgba(0,0,0,0.05);
       }
+      /* Leaflet Custom Overrides */
+      .leaflet-container {
+        background: #F8FAFC;
+        font-family: 'Inter', sans-serif;
+      }
+      .custom-pin {
+        background: transparent;
+        border: none;
+      }
     </style>
   <script type="importmap">
 {
@@ -55,7 +65,8 @@
     "react-markdown": "https://esm.sh/react-markdown@9?bundle",
     "react-syntax-highlighter": "https://esm.sh/react-syntax-highlighter@15?bundle",
     "react-syntax-highlighter/dist/esm/styles/prism": "https://esm.sh/react-syntax-highlighter@15/dist/esm/styles/prism?bundle",
-    "react-syntax-highlighter/": "https://esm.sh/react-syntax-highlighter@^16.1.0/"
+    "react-syntax-highlighter/": "https://esm.sh/react-syntax-highlighter@^16.1.0/",
+    "leaflet": "https://esm.sh/leaflet@1.9.4"
   }
 }
 </script>

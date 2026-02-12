@@ -15,7 +15,8 @@
     "react": "^19.2.4",
     "lucide-react": "^0.563.0",
     "react-markdown": "9",
-    "react-syntax-highlighter": "^16.1.0"
+    "react-syntax-highlighter": "^16.1.0",
+    "leaflet": "1.9.4"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",

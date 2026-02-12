@@ -2,7 +2,7 @@
 const API_KEY = "sk-4eca3ab91c464c0b81f6417bf3f4512b";
 const API_URL = "https://api.deepseek.com/chat/completions";
 
-export const generateObservabilityInsight = async (query: string): Promise<string> => {
+export const generateObservabilityInsightStream = async function* (query: string) {
   try {
     const response = await fetch(API_URL, {
       method: "POST",
@@ -22,20 +22,45 @@ export const generateObservabilityInsight = async (query: string): Promise<strin
             content: query
           }
         ],
-        stream: false
+        stream: true
       })
     });
 
     if (!response.ok) {
-        const errorText = await response.text();
-        console.error("DeepSeek API Response:", errorText);
         throw new Error(`DeepSeek API Error: ${response.status}`);
     }
 
-    const data = await response.json();
-    return data.choices?.[0]?.message?.content || "暂时无法生成见解。";
+    if (!response.body) throw new Error("No response body");
+
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder("utf-8");
+    let buffer = '';
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+
+      buffer += decoder.decode(value, { stream: true });
+      const lines = buffer.split('\n');
+      buffer = lines.pop() || '';
+
+      for (const line of lines) {
+        const trimmed = line.trim();
+        if (trimmed.startsWith('data: ')) {
+           const jsonStr = trimmed.slice(6);
+           if (jsonStr === '[DONE]') return;
+           try {
+             const json = JSON.parse(jsonStr);
+             const content = json.choices?.[0]?.delta?.content || "";
+             if (content) yield content;
+           } catch (e) {
+             console.warn("Error parsing stream:", e);
+           }
+        }
+      }
+    }
   } catch (error) {
     console.error("AI Service Error:", error);
-    return "我目前无法连接到 DeepSeek 知识库，请检查网络或稍后再试。";
+    yield "我目前无法连接到 DeepSeek 知识库，请检查网络或稍后再试。";
   }
 };
