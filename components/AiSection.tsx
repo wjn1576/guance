@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Icons } from './Icons';
 import { generateObservabilityInsightStream } from '../services/geminiService';
 import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
@@ -108,6 +109,7 @@ export const AiSection: React.FC = () => {
                     <h4 className="text-sm font-bold text-gray-400 uppercase mb-2">Copilot 回答</h4>
                     <div className="prose prose-invert max-w-none text-gray-200">
                       <ReactMarkdown
+                        remarkPlugins={[remarkGfm]}
                         components={{
                           code(props: any) {
                             const {children, className, node, ...rest} = props
@@ -119,14 +121,32 @@ export const AiSection: React.FC = () => {
                                 children={String(children).replace(/\n$/, '')}
                                 language={match[1]}
                                 style={vscDarkPlus}
-                                className="rounded-md !bg-[#0d1117] !p-4 !m-0"
+                                className="rounded-md !bg-[#0d1117] !p-4 !m-0 border border-gray-700"
                               />
                             ) : (
-                              <code {...rest} className={`${className} bg-white/10 rounded px-1 py-0.5`}>
+                              <code {...rest} className={`${className} bg-white/10 rounded px-1.5 py-0.5 text-orange-200 font-mono text-sm`}>
                                 {children}
                               </code>
                             )
-                          }
+                          },
+                          // Custom styling for tables to ensure they look good in dark mode
+                          table: ({node, ...props}) => (
+                            <div className="overflow-x-auto my-6 rounded-lg border border-gray-700">
+                               <table {...props} className="min-w-full divide-y divide-gray-700" />
+                            </div>
+                          ),
+                          thead: ({node, ...props}) => <thead {...props} className="bg-white/5" />,
+                          tbody: ({node, ...props}) => <tbody {...props} className="divide-y divide-gray-700 bg-transparent" />,
+                          tr: ({node, ...props}) => <tr {...props} className="hover:bg-white/5 transition-colors" />,
+                          th: ({node, ...props}) => <th {...props} className="px-4 py-3 text-left text-xs font-bold text-gray-200 uppercase tracking-wider" />,
+                          td: ({node, ...props}) => <td {...props} className="px-4 py-3 text-sm text-gray-300 whitespace-pre-wrap" />,
+                          a: ({node, ...props}) => <a {...props} className="text-guance-orange hover:underline" target="_blank" rel="noopener noreferrer" />,
+                          ul: ({node, ...props}) => <ul {...props} className="list-disc list-outside ml-5 space-y-1 my-4" />,
+                          ol: ({node, ...props}) => <ol {...props} className="list-decimal list-outside ml-5 space-y-1 my-4" />,
+                          h1: ({node, ...props}) => <h1 {...props} className="text-2xl font-bold text-white mt-8 mb-4 border-b border-gray-700 pb-2" />,
+                          h2: ({node, ...props}) => <h2 {...props} className="text-xl font-bold text-white mt-6 mb-3" />,
+                          h3: ({node, ...props}) => <h3 {...props} className="text-lg font-bold text-gray-200 mt-4 mb-2" />,
+                          p: ({node, ...props}) => <p {...props} className="my-3 leading-relaxed" />,
                         }}
                       >
                         {response}
